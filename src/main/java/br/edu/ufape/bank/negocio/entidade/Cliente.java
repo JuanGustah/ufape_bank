@@ -15,7 +15,6 @@ public class Cliente {
     private String nome;
     @Embedded
     private Endereco endereco;
-    
 
     public Cliente(String cpf, String nome) {
         this.nome = nome;
