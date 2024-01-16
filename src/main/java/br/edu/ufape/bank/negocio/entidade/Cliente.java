@@ -15,6 +15,10 @@ public class Cliente {
     private String nome;
     @Embedded
     private Endereco endereco;
+    
+    public Cliente() {
+    	
+    }
 
     public Cliente(String cpf, String nome) {
         this.nome = nome;
@@ -36,6 +40,14 @@ public class Cliente {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+    
+    public Endereco getEndereco() {
+		return endereco;
+	}
+	
+	public void setEndereco(Endereco endereco){
+		this.endereco = endereco;
+	}
 
     @Override
     public boolean equals(Object obj) {
