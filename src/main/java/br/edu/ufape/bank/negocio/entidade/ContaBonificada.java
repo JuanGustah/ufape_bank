@@ -20,12 +20,12 @@ public class ContaBonificada extends Conta{
         if (valor < 0) {
             throw new IllegalArgumentException();
         }
-        bonus += (valor * taxaBonus);
+        this.bonus += (valor * this.taxaBonus);
         super.creditar(valor);
     }
 
     public void renderBonus() {
-        super.creditar(bonus);
-        bonus = 0;
+        super.creditar(this.bonus);
+        this.bonus = 0;
     }
 }
