@@ -1,13 +1,16 @@
 package br.edu.ufape.bank.negocio.entidade;
 
 import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToOne;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ContaAbstrata {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,29 +1,28 @@
 package br.edu.ufape.bank.dados;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ufape.bank.negocio.entidade.Cliente;
 import br.edu.ufape.bank.negocio.entidade.ContaAbstrata;
+import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
 
 public interface IRepositorioContas {
 
     void adicionar(ContaAbstrata conta);
 
-    void remover(ContaAbstrata conta);
+    void remover(long id) throws ContaNaoEncontradaException;
 
-    void atualizar(ContaAbstrata conta);
+    void atualizar(long id, ContaAbstrata conta) throws ContaNaoEncontradaException;
 
     boolean existe(String numero);
     
     boolean existe(long id);
 
-    ContaAbstrata consultar(ContaAbstrata conta);
-
-    ContaAbstrata consultar(String numero);
+    ContaAbstrata consultar(String numero) throws ContaNaoEncontradaException;
     
-    ContaAbstrata consultar(long id);
+    ContaAbstrata consultar(long id) throws ContaNaoEncontradaException;
 
-    ArrayList<ContaAbstrata> consultar(Cliente cliente);
+    List<ContaAbstrata> consultar(Cliente cliente);
 
-    void listar();
+    List<ContaAbstrata> listar();
 }

@@ -1,4 +1,4 @@
-package br.edu.ufape.bank.negocio.excecao.conta;
+package br.edu.ufape.bank.negocio.excecao.cliente;
 
 public class ClienteNaoEncontradoException extends Exception{
 	public ClienteNaoEncontradoException() {

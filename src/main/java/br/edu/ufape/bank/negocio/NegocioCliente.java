@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import br.edu.ufape.bank.dados.IColecaoCliente;
 import br.edu.ufape.bank.dados.IRepositorioClientes;
 import br.edu.ufape.bank.negocio.entidade.Cliente;
-import br.edu.ufape.bank.negocio.excecao.conta.ClienteNaoEncontradoException;
+import br.edu.ufape.bank.negocio.excecao.cliente.ClienteNaoEncontradoException;
+import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
 
 @Service
 public class NegocioCliente implements IRepositorioClientes{
@@ -32,7 +33,17 @@ public class NegocioCliente implements IRepositorioClientes{
 	}
 
 	@Override
-	public void atualizar(Cliente cliente) {
+	public void atualizar(long id, Cliente cliente) throws ClienteNaoEncontradoException{
+		Cliente clienteSalvo = colecaoCliente.findById(id).orElse(null);
+		
+		if(cliente == null) {
+			throw new ClienteNaoEncontradoException();
+		}
+		
+		clienteSalvo.setNome(cliente.getNome());
+		clienteSalvo.setCpf(cliente.getCpf());
+		clienteSalvo.setEndereco(cliente.getEndereco());
+		
 		colecaoCliente.save(cliente);
 	}
 
