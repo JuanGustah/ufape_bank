@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.edu.ufape.bank.negocio.entidade.Cliente;
 
-public interface ColecaoCliente extends JpaRepository<Cliente, Long>{
+public interface IColecaoCliente extends JpaRepository<Cliente, Long>{
 
 }
