@@ -11,7 +11,7 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-    private String cpf;
+	private String cpf;
     private String nome;
     @Embedded
     private Endereco endereco;
@@ -24,6 +24,14 @@ public class Cliente {
         this.nome = nome;
         this.cpf = cpf;
     }
+    
+    public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
     public String getNome() {
         return nome;

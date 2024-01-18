@@ -1,21 +1,22 @@
 package br.edu.ufape.bank.dados;
 
+import java.util.List;
+
 import br.edu.ufape.bank.negocio.entidade.Cliente;
+import br.edu.ufape.bank.negocio.excecao.conta.ClienteNaoEncontradoException;
 
 public interface IRepositorioClientes {
 	void adicionar(Cliente cliente);
 
-    void remover(Cliente cliente);
+    void remover(long id) throws ClienteNaoEncontradoException;
 
     void atualizar(Cliente cliente);
 
-    Cliente consultar(Cliente cliente);
-
-    Cliente consultar(String cpf);
+    Cliente consultar(String cpf) throws ClienteNaoEncontradoException;
     
-    Cliente consultar(long id);
+    Cliente consultar(long id) throws ClienteNaoEncontradoException;
 
-    void listar();
+    List<Cliente> listar();
 
     boolean existe(String cpf);
     
