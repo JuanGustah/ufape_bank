@@ -34,15 +34,15 @@ public class NegocioConta implements IRepositorioContas{
 	}
 
 	@Override
-	public void atualizar(long id, ContaAbstrata conta) throws ContaNaoEncontradaException{
+	public void atualizar(long id, Cliente cliente, String numero) throws ContaNaoEncontradaException{
 		ContaAbstrata contaSalva = colecaoConta.findById(id).orElse(null);
 		
 		if(contaSalva == null) {
 			throw new ContaNaoEncontradaException();
 		}
 		
-		contaSalva.setCliente(conta.getCliente());
-		contaSalva.setNumero(conta.getNumero());
+		contaSalva.setCliente(cliente);
+		contaSalva.setNumero(numero);
 		
 		colecaoConta.save(contaSalva);
 	}
@@ -114,6 +114,9 @@ public class NegocioConta implements IRepositorioContas{
 		
 		contaOrigem.debitar(valor);
 		contaDestino.creditar(valor);
+		
+		colecaoConta.save(contaOrigem);
+		colecaoConta.save(contaDestino);
 	}
 
 	@Override
@@ -125,6 +128,7 @@ public class NegocioConta implements IRepositorioContas{
 		}
 		
 		conta.debitar(valor);
+		colecaoConta.save(conta);
 	}
 
 	@Override
@@ -136,6 +140,6 @@ public class NegocioConta implements IRepositorioContas{
 		}
 		
 		conta.creditar(valor);
-		
+		colecaoConta.save(conta);
 	}
 }

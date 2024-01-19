@@ -13,7 +13,7 @@ public interface IRepositorioContas {
 
     void remover(long id) throws ContaNaoEncontradaException;
 
-    void atualizar(long id, ContaAbstrata conta) throws ContaNaoEncontradaException;
+    void atualizar(long id, Cliente cliente, String numero) throws ContaNaoEncontradaException;
 
     boolean existe(String numero);
     

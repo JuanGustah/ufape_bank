@@ -87,8 +87,10 @@ public class Banco {
     	cadastroConta.remover(id);
     }
 
-    public void atualizarConta(long id, ContaAbstrata conta) throws ContaNaoEncontradaException{
-    	cadastroConta.atualizar(id, conta);
+    public void atualizarConta(long id, long idCliente, String numero) throws ContaNaoEncontradaException, ClienteNaoEncontradoException{
+    	Cliente cliente = cadastroCliente.consultar(idCliente);
+    	
+    	cadastroConta.atualizar(id, cliente, numero);
     }
     
     public ContaAbstrata consultarConta(long id) throws ContaNaoEncontradaException{

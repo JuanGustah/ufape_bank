@@ -35,7 +35,7 @@ public class NegocioCliente implements IRepositorioClientes{
 	public void atualizar(long id, Cliente cliente) throws ClienteNaoEncontradoException{
 		Cliente clienteSalvo = colecaoCliente.findById(id).orElse(null);
 		
-		if(cliente == null) {
+		if(clienteSalvo == null) {
 			throw new ClienteNaoEncontradoException();
 		}
 		
@@ -43,7 +43,7 @@ public class NegocioCliente implements IRepositorioClientes{
 		clienteSalvo.setCpf(cliente.getCpf());
 		clienteSalvo.setEndereco(cliente.getEndereco());
 		
-		colecaoCliente.save(cliente);
+		colecaoCliente.save(clienteSalvo);
 	}
 
 	@Override

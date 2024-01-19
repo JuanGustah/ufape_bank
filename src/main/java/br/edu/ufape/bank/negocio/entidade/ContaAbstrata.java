@@ -53,7 +53,7 @@ public abstract class ContaAbstrata {
         if (valor < 0) {
             throw new IllegalArgumentException();
         }
-        saldo += valor;
+        this.saldo += valor;
     }
 
     public abstract void debitar(double valor) throws SaldoInsuficienteException;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,6 +22,7 @@ import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
 import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
 import br.edu.ufape.bank.negocio.excecao.conta.TipoContaNaoExisteException;
 
+@Controller
 public class ControladorConta {
 	@Autowired
 	private Banco banco;
@@ -50,20 +52,20 @@ public class ControladorConta {
 	}
 	
 	@PatchMapping(value = "/conta/{idConta}")
-	public ResponseEntity<String> atualizarCliente(@PathVariable long idConta, @RequestBody ContaAbstrata conta) {
+	public ResponseEntity<String> atualizarConta(@PathVariable long idConta, @RequestBody RequisicaoConta conta) {
 		try {
-			banco.atualizarConta(idConta,conta);
+			banco.atualizarConta(idConta,conta.getIdCliente(),conta.getNumero());
 			return ResponseEntity.ok("Atualizado com sucesso!");
-		} catch (ContaNaoEncontradaException e) {
+		} catch (ClienteNaoEncontradoException | ContaNaoEncontradaException e) {
 			return ResponseEntity.badRequest().body("Conta não foi encontrada.");
 		}
 	}
 	
 	@DeleteMapping(value = "/conta/{idConta}")
-	public ResponseEntity<String> removerCliente(@PathVariable long idConta) {
+	public ResponseEntity<String> removerConta(@PathVariable long idConta) {
 		try {
 			banco.removerConta(idConta);
-			return ResponseEntity.ok("Cliente removido com sucesso!");
+			return ResponseEntity.ok("Conta removida com sucesso!");
 		} catch (ContaNaoEncontradaException e) {
 			return ResponseEntity.badRequest().body("Conta não foi encontrada.");
 		}
