@@ -8,9 +8,15 @@ import org.springframework.stereotype.Service;
 import br.edu.ufape.bank.dados.IRepositorioClientes;
 import br.edu.ufape.bank.dados.IRepositorioContas;
 import br.edu.ufape.bank.negocio.entidade.Cliente;
+import br.edu.ufape.bank.negocio.entidade.Conta;
 import br.edu.ufape.bank.negocio.entidade.ContaAbstrata;
+import br.edu.ufape.bank.negocio.entidade.ContaBonificada;
+import br.edu.ufape.bank.negocio.entidade.ContaImposto;
+import br.edu.ufape.bank.negocio.entidade.ContaPoupanca;
 import br.edu.ufape.bank.negocio.excecao.cliente.ClienteNaoEncontradoException;
 import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
+import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
+import br.edu.ufape.bank.negocio.excecao.conta.TipoContaNaoExisteException;
 
 @Service
 public class Banco {
@@ -53,7 +59,27 @@ public class Banco {
     }
 	
     /* Conta */
-    public void adicionarConta(ContaAbstrata conta) {
+    public void adicionarConta(long idCliente, String numeroConta, double saldo, int tipo) throws TipoContaNaoExisteException, ClienteNaoEncontradoException{
+    	Cliente cliente = cadastroCliente.consultar(idCliente);
+    	ContaAbstrata conta;
+    	
+    	switch(tipo) {
+	    	case 1: // Tipo Conta
+	            conta = new Conta(cliente, numeroConta, saldo);
+	            break;
+	        case 2: // Tipo Poupanca
+	            conta = new ContaPoupanca(cliente, numeroConta, saldo);
+	            break;
+	        case 3: // Tipo ContaBonificada
+	            conta = new ContaBonificada(cliente, numeroConta, saldo);
+	            break;
+	        case 4: // Tipo ContaImposto
+	            conta = new ContaImposto(cliente, numeroConta, saldo);
+	            break;
+	        default:
+	            throw new TipoContaNaoExisteException();
+    	}
+    	
     	cadastroConta.adicionar(conta);
     }
 
@@ -64,28 +90,25 @@ public class Banco {
     public void atualizarConta(long id, ContaAbstrata conta) throws ContaNaoEncontradaException{
     	cadastroConta.atualizar(id, conta);
     }
-
-    public boolean existeConta(String numero) {
-    	return cadastroConta.existe(numero);
-    }
-    
-    public boolean existeConta(long id) {
-    	return cadastroConta.existe(id);
-    }
-
-    public ContaAbstrata consultarConta(String numero) throws ContaNaoEncontradaException{
-    	return cadastroConta.consultar(numero);
-    }
     
     public ContaAbstrata consultarConta(long id) throws ContaNaoEncontradaException{
     	return cadastroConta.consultar(id);
     }
 
-    public List<ContaAbstrata> consultarConta(Cliente cliente){
-    	return cadastroConta.consultar(cliente);
-    }
-
     public List<ContaAbstrata> listarConta(){
     	return cadastroConta.listar();
     }
+    
+    public void transferir(long idContaOrigem, long idContaDestino, double valor) throws SaldoInsuficienteException, ContaNaoEncontradaException {
+    	cadastroConta.transferir(idContaOrigem, idContaDestino, valor);
+    }
+    
+    public void debitar(long idConta, double valor) throws ContaNaoEncontradaException, SaldoInsuficienteException {
+    	cadastroConta.debitar(idConta, valor);
+    }
+    
+    public void creditar(long idConta, double valor) throws ContaNaoEncontradaException {
+    	cadastroConta.creditar(idConta, valor);
+    }
+    
 }

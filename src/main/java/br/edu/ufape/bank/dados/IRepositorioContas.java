@@ -5,6 +5,7 @@ import java.util.List;
 import br.edu.ufape.bank.negocio.entidade.Cliente;
 import br.edu.ufape.bank.negocio.entidade.ContaAbstrata;
 import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
+import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
 
 public interface IRepositorioContas {
 
@@ -25,4 +26,10 @@ public interface IRepositorioContas {
     List<ContaAbstrata> consultar(Cliente cliente);
 
     List<ContaAbstrata> listar();
+    
+    void transferir(long idContaOrigem, long idContaDestino, double valor) throws SaldoInsuficienteException,ContaNaoEncontradaException;
+    
+    void debitar(long idConta, double valor) throws ContaNaoEncontradaException, SaldoInsuficienteException;
+    
+    void creditar(long idConta, double valor) throws ContaNaoEncontradaException;
 }

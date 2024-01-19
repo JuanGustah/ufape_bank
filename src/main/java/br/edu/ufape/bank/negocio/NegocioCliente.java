@@ -9,7 +9,6 @@ import br.edu.ufape.bank.dados.IColecaoCliente;
 import br.edu.ufape.bank.dados.IRepositorioClientes;
 import br.edu.ufape.bank.negocio.entidade.Cliente;
 import br.edu.ufape.bank.negocio.excecao.cliente.ClienteNaoEncontradoException;
-import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
 
 @Service
 public class NegocioCliente implements IRepositorioClientes{

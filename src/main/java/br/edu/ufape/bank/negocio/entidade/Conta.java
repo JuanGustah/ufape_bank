@@ -2,12 +2,14 @@ package br.edu.ufape.bank.negocio.entidade;
 
 import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 
 @Entity
 public class Conta extends ContaAbstrata{
     public Conta() {
+    }
+    
+    public Conta(Cliente cliente,String numero,double saldo) {
+    	super(cliente,numero,saldo);
     }
 
     @Override

@@ -10,6 +10,7 @@ import br.edu.ufape.bank.dados.IRepositorioContas;
 import br.edu.ufape.bank.negocio.entidade.Cliente;
 import br.edu.ufape.bank.negocio.entidade.ContaAbstrata;
 import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
+import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
 
 @Service
 public class NegocioConta implements IRepositorioContas{
@@ -100,5 +101,41 @@ public class NegocioConta implements IRepositorioContas{
 		List<ContaAbstrata> contas = colecaoConta.findByClienteId(cliente.getId());
 		
 		return contas;
+	}
+
+	@Override
+	public void transferir(long idContaOrigem, long idContaDestino, double valor) throws SaldoInsuficienteException,ContaNaoEncontradaException {
+		ContaAbstrata contaOrigem = colecaoConta.findById(idContaOrigem).orElse(null);
+		ContaAbstrata contaDestino = colecaoConta.findById(idContaDestino).orElse(null);
+		
+		if(contaOrigem == null || contaDestino == null) {
+			throw new ContaNaoEncontradaException();
+		}
+		
+		contaOrigem.debitar(valor);
+		contaDestino.creditar(valor);
+	}
+
+	@Override
+	public void debitar(long idConta, double valor) throws ContaNaoEncontradaException, SaldoInsuficienteException {
+		ContaAbstrata conta = colecaoConta.findById(idConta).orElse(null);
+		
+		if(conta == null) {
+			throw new ContaNaoEncontradaException();
+		}
+		
+		conta.debitar(valor);
+	}
+
+	@Override
+	public void creditar(long idConta, double valor) throws ContaNaoEncontradaException {
+		ContaAbstrata conta = colecaoConta.findById(idConta).orElse(null);
+		
+		if(conta == null) {
+			throw new ContaNaoEncontradaException();
+		}
+		
+		conta.creditar(valor);
+		
 	}
 }

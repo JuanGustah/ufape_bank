@@ -1,8 +1,6 @@
 package br.edu.ufape.bank.negocio.entidade;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Transient;
 
 @Entity
@@ -13,6 +11,11 @@ public class ContaBonificada extends Conta{
 
     public ContaBonificada() {
         this.taxaBonus = 0.1;
+    }
+    
+    public ContaBonificada(Cliente cliente,String numero,double saldo) {
+    	super(cliente,numero,saldo);
+    	this.taxaBonus = 0.1;
     }
 
     @Override

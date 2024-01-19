@@ -23,6 +23,12 @@ public abstract class ContaAbstrata {
     public ContaAbstrata() {
     }
     
+    public ContaAbstrata(Cliente cliente,String numero,double saldo) {
+    	this.cliente = cliente;
+    	this.numero = numero;
+    	this.saldo = saldo;
+    }
+    
     public String getNumero() {
         return numero;
     }
@@ -51,14 +57,6 @@ public abstract class ContaAbstrata {
     }
 
     public abstract void debitar(double valor) throws SaldoInsuficienteException;
-
-    public void transferir(ContaAbstrata conta, double valor) throws SaldoInsuficienteException {
-        if (valor < 0) {
-            throw new IllegalArgumentException();
-        }
-        this.debitar(valor);
-        conta.creditar(valor);
-    }
 
     @Override
     public String toString() {

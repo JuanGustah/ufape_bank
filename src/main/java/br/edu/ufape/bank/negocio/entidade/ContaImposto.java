@@ -12,6 +12,11 @@ public class ContaImposto extends ContaAbstrata {
     public ContaImposto() {
         this.taxaImposto = 0.02;
     }
+    
+    public ContaImposto(Cliente cliente,String numero,double saldo) {
+    	super(cliente,numero,saldo);
+    	this.taxaImposto = 0.02;
+    }
 
     @Override
     public void debitar(double valor) throws SaldoInsuficienteException {
