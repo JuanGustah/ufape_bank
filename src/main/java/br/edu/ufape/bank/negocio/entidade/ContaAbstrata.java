@@ -29,7 +29,15 @@ public abstract class ContaAbstrata {
     	this.saldo = saldo;
     }
     
-    public String getNumero() {
+    public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNumero() {
         return numero;
     }
 
