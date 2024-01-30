@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import br.edu.ufape.bank.controlador.dto.RequisicaoConta;
 import br.edu.ufape.bank.controlador.dto.RequisicaoDebitarCreditar;
 import br.edu.ufape.bank.controlador.dto.RequisicaoTransferirValorConta;
 import br.edu.ufape.bank.fachada.Banco;
+import br.edu.ufape.bank.negocio.entidade.Conta;
 import br.edu.ufape.bank.negocio.entidade.ContaAbstrata;
 import br.edu.ufape.bank.negocio.excecao.cliente.ClienteNaoEncontradoException;
 import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
@@ -41,20 +41,24 @@ public class ControladorConta {
 		}
 	}
 	
-	@PostMapping(value = "/conta")
-	public ResponseEntity<String> cadastrarConta(@RequestBody RequisicaoConta conta) {
+	@PostMapping(value = "/conta/{tipoConta}")
+	public ResponseEntity<String> cadastrarConta(@RequestBody Conta conta, @PathVariable int tipoConta) {
 		try {
-			banco.adicionarConta(conta.getIdCliente(), conta.getNumero(), conta.getSaldo(), conta.getTipo());
+			banco.adicionarConta(conta, tipoConta);
 			return ResponseEntity.ok("Cadastrada com sucesso!");
 		} catch (TipoContaNaoExisteException | ClienteNaoEncontradoException e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}catch(Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
 	
 	@PatchMapping(value = "/conta/{idConta}")
-	public ResponseEntity<String> atualizarConta(@PathVariable long idConta, @RequestBody RequisicaoConta conta) {
+	public ResponseEntity<String> atualizarConta(@PathVariable long idConta, @RequestBody Conta conta) {
 		try {
-			banco.atualizarConta(idConta,conta.getIdCliente(),conta.getNumero());
+			banco.atualizarConta(idConta,conta.getCliente().getId(),conta.getNumero());
 			return ResponseEntity.ok("Atualizado com sucesso!");
 		} catch (ClienteNaoEncontradoException | ContaNaoEncontradaException e) {
 			return ResponseEntity.badRequest().body("Conta não foi encontrada.");

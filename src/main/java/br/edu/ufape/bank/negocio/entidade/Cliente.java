@@ -1,5 +1,6 @@
 package br.edu.ufape.bank.negocio.entidade;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,7 +14,7 @@ public class Cliente {
 	private long id;
 	private String cpf;
     private String nome;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
     
     public Cliente() {

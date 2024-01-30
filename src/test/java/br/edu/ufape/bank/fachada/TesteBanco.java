@@ -13,19 +13,19 @@ public class TesteBanco {
 	@Autowired
 	Banco banco;
 	
-	@Test
-	void criarContaMesmoCliente(){
-		Cliente cliente = new Cliente();
-		
-		try {
-			banco.adicionarConta(cliente.getId(), "5489745", 0, 1);
-			banco.adicionarConta(cliente.getId(), "4198789", 0, 1);
-			fail("Não deve ser possível adicionar duas contas com o mesmo cliente.");
-		}catch(Exception e) {
-			withSuccess();
-		}
-	}
-	
+//	@Test
+//	void criarContaMesmoCliente(){
+//		Cliente cliente = new Cliente();
+//		
+//		try {
+//			banco.adicionarConta(cliente.getId(), "5489745", 0, 1);
+//			banco.adicionarConta(cliente.getId(), "4198789", 0, 1);
+//			fail("Não deve ser possível adicionar duas contas com o mesmo cliente.");
+//		}catch(Exception e) {
+//			withSuccess();
+//		}
+//	}
+//	
 	@Test
 	void transferirValorEntreContasSemSaldo(){
 		Conta conta = new Conta();

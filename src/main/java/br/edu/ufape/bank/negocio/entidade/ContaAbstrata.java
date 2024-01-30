@@ -1,6 +1,7 @@
 package br.edu.ufape.bank.negocio.entidade;
 
 import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +16,7 @@ public abstract class ContaAbstrata {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	protected Cliente cliente;
     protected String numero;
     protected double saldo;

@@ -59,28 +59,28 @@ public class Banco {
     }
 	
     /* Conta */
-    public void adicionarConta(long idCliente, String numeroConta, double saldo, int tipo) throws TipoContaNaoExisteException, ClienteNaoEncontradoException{
-    	Cliente cliente = cadastroCliente.consultar(idCliente);
-    	ContaAbstrata conta;
+    public void adicionarConta(ContaAbstrata conta, int tipo) throws TipoContaNaoExisteException, ClienteNaoEncontradoException{
+    	Cliente cliente = cadastroCliente.consultar(conta.getCliente().getId());
+    	ContaAbstrata novaConta;
     	
     	switch(tipo) {
 	    	case 1: // Tipo Conta
-	            conta = new Conta(cliente, numeroConta, saldo);
+	    		novaConta = new Conta(cliente, conta.getNumero(), conta.getSaldo());
 	            break;
 	        case 2: // Tipo Poupanca
-	            conta = new ContaPoupanca(cliente, numeroConta, saldo);
+	        	novaConta = new ContaPoupanca(cliente, conta.getNumero(), conta.getSaldo());
 	            break;
 	        case 3: // Tipo ContaBonificada
-	            conta = new ContaBonificada(cliente, numeroConta, saldo);
+	        	novaConta = new ContaBonificada(cliente, conta.getNumero(), conta.getSaldo());
 	            break;
 	        case 4: // Tipo ContaImposto
-	            conta = new ContaImposto(cliente, numeroConta, saldo);
+	        	novaConta = new ContaImposto(cliente, conta.getNumero(), conta.getSaldo());
 	            break;
 	        default:
 	            throw new TipoContaNaoExisteException();
     	}
     	
-    	cadastroConta.adicionar(conta);
+    	cadastroConta.adicionar(novaConta);
     }
 
     public void removerConta(long id) throws ContaNaoEncontradaException{
