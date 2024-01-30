@@ -1,11 +1,9 @@
 package br.edu.ufape.bank.negocio.entidade;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
 
 @Entity
 public class ContaPoupanca extends Conta{
-	@Transient
     private double juros;
 
     public ContaPoupanca() {

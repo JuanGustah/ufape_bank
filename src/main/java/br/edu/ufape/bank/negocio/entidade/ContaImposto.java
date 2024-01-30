@@ -2,11 +2,9 @@ package br.edu.ufape.bank.negocio.entidade;
 
 import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
 
 @Entity
 public class ContaImposto extends ContaAbstrata {
-	@Transient
     private double taxaImposto;
 
     public ContaImposto() {

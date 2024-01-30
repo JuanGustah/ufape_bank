@@ -1,10 +1,10 @@
 package br.edu.ufape.bank.negocio.entidade;
 
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Cliente {
@@ -13,7 +13,7 @@ public class Cliente {
 	private long id;
 	private String cpf;
     private String nome;
-    @Embedded
+    @OneToOne
     private Endereco endereco;
     
     public Cliente() {

@@ -1,12 +1,10 @@
 package br.edu.ufape.bank.negocio.entidade;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
 
 @Entity
 public class ContaBonificada extends Conta{
     private double bonus;
-    @Transient
     private double taxaBonus;
 
     public ContaBonificada() {
