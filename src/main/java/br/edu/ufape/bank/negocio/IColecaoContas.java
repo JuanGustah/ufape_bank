@@ -1,4 +1,4 @@
-package br.edu.ufape.bank.dados;
+package br.edu.ufape.bank.negocio;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import br.edu.ufape.bank.negocio.entidade.ContaAbstrata;
 import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
 import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
 
-public interface IRepositorioContas {
+public interface IColecaoContas {
 
     void adicionar(ContaAbstrata conta);
 

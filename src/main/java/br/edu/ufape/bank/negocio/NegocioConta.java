@@ -5,17 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufape.bank.dados.IColecaoConta;
-import br.edu.ufape.bank.dados.IRepositorioContas;
+import br.edu.ufape.bank.dados.IRepositorioConta;
 import br.edu.ufape.bank.negocio.entidade.Cliente;
 import br.edu.ufape.bank.negocio.entidade.ContaAbstrata;
 import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
 import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
 
 @Service
-public class NegocioConta implements IRepositorioContas{
+public class NegocioConta implements IColecaoContas{
 	@Autowired
-	private IColecaoConta colecaoConta;
+	private IRepositorioConta colecaoConta;
 
 	@Override
 	public void adicionar(ContaAbstrata conta) {

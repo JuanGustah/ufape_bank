@@ -5,15 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufape.bank.dados.IColecaoCliente;
-import br.edu.ufape.bank.dados.IRepositorioClientes;
+import br.edu.ufape.bank.dados.IRepositorioCliente;
 import br.edu.ufape.bank.negocio.entidade.Cliente;
 import br.edu.ufape.bank.negocio.excecao.cliente.ClienteNaoEncontradoException;
 
 @Service
-public class NegocioCliente implements IRepositorioClientes{
+public class NegocioCliente implements IColecaoClientes{
 	@Autowired
-	 private IColecaoCliente colecaoCliente;
+	 private IRepositorioCliente colecaoCliente;
 
 	@Override
 	public void adicionar(Cliente cliente) {

@@ -1,11 +1,11 @@
-package br.edu.ufape.bank.dados;
+package br.edu.ufape.bank.negocio;
 
 import java.util.List;
 
 import br.edu.ufape.bank.negocio.entidade.Cliente;
 import br.edu.ufape.bank.negocio.excecao.cliente.ClienteNaoEncontradoException;
 
-public interface IRepositorioClientes {
+public interface IColecaoClientes {
 	void adicionar(Cliente cliente);
 
     void remover(long id) throws ClienteNaoEncontradoException;
