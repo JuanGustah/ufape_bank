@@ -16,7 +16,7 @@ public abstract class ContaAbstrata {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	protected Cliente cliente;
     protected String numero;
     protected double saldo;
