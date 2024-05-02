@@ -12,7 +12,7 @@ import br.edu.ufape.bank.negocio.excecao.conta.ContaNaoEncontradaException;
 import br.edu.ufape.bank.negocio.excecao.conta.SaldoInsuficienteException;
 
 @Service
-public class NegocioConta implements IColecaoContas{
+public class NegocioConta implements INegocioContas{
 	@Autowired
 	private IRepositorioConta colecaoConta;
 

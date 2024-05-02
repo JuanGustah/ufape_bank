@@ -10,7 +10,7 @@ import br.edu.ufape.bank.negocio.entidade.Cliente;
 import br.edu.ufape.bank.negocio.excecao.cliente.ClienteNaoEncontradoException;
 
 @Service
-public class NegocioCliente implements IColecaoClientes{
+public class NegocioCliente implements INegocioClientes{
 	@Autowired
 	 private IRepositorioCliente colecaoCliente;
 

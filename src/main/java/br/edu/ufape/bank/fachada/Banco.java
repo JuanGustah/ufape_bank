@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufape.bank.negocio.IColecaoClientes;
-import br.edu.ufape.bank.negocio.IColecaoContas;
+import br.edu.ufape.bank.negocio.INegocioClientes;
+import br.edu.ufape.bank.negocio.INegocioContas;
 import br.edu.ufape.bank.negocio.entidade.Cliente;
 import br.edu.ufape.bank.negocio.entidade.Conta;
 import br.edu.ufape.bank.negocio.entidade.ContaAbstrata;
@@ -21,9 +21,9 @@ import br.edu.ufape.bank.negocio.excecao.conta.TipoContaNaoExisteException;
 @Service
 public class Banco {
 	@Autowired
-	private IColecaoClientes cadastroCliente;
+	private INegocioClientes cadastroCliente;
 	@Autowired
-	private IColecaoContas cadastroConta;
+	private INegocioContas cadastroConta;
 	
 	/* Cliente */
 	public void adicionarCliente(Cliente cliente) {

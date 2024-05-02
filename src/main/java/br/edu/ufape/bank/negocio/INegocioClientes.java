@@ -5,7 +5,7 @@ import java.util.List;
 import br.edu.ufape.bank.negocio.entidade.Cliente;
 import br.edu.ufape.bank.negocio.excecao.cliente.ClienteNaoEncontradoException;
 
-public interface IColecaoClientes {
+public interface INegocioClientes {
 	void adicionar(Cliente cliente);
 
     void remover(long id) throws ClienteNaoEncontradoException;
